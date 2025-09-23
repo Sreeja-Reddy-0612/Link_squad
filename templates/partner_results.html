@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Search Results</title>
+</head>
+<body>
+    <h2>Top LinkedIn Profiles</h2>
+    {% if profiles %}
+        <ul>
+        {% for profile in profiles %}
+            <li>
+                <strong>{{ profile.title }}</strong><br>
+                <a href="{{ profile.link }}" target="_blank">{{ profile.link }}</a><br>
+                <em>{{ profile.snippet }}</em><br><br>
+            </li>
+        {% endfor %}
+        </ul>
+    {% else %}
+        <p>No results found.</p>
+    {% endif %}
+    <br>
+    <a href="/partner_search">🔙 Back to Search</a>
+</body>
+</html>

@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Sign Up</title>
+  <style>
+    body {
+      background: #2c3e50;
+      color: #fff;
+      font-family: 'Roboto', sans-serif;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+    }
+    #success-wrapper {
+      display: none;
+      flex-direction: column;
+      align-items: center;
+      margin-bottom: 20px;
+    }
+    #success-message {
+      background-color: #27ae60;
+      padding: 15px 20px;
+      border-radius: 8px;
+      margin-bottom: 10px;
+    }
+    #ok-button {
+      padding: 10px 20px;
+      background-color: #1abc9c;
+      color: white;
+      border: none;
+      border-radius: 6px;
+      font-weight: bold;
+      cursor: pointer;
+    }
+    form {
+      background: #34495e;
+      padding: 40px;
+      border-radius: 12px;
+      width: 350px;
+      display: flex;
+      flex-direction: column;
+    }
+    input, select {
+      padding: 10px;
+      margin: 10px 0;
+      border: none;
+      border-radius: 6px;
+    }
+    button[type="submit"] {
+      padding: 10px;
+      background: #1abc9c;
+      border: none;
+      color: white;
+      font-weight: bold;
+      border-radius: 6px;
+      cursor: pointer;
+    }
+    #file-info {
+      font-size: 0.9rem;
+      margin-top: 5px;
+      color: #ecf0f1;
+    }
+    a#view-resume {
+      color: #1abc9c;
+      font-size: 0.9rem;
+      display: none;
+      margin-top: 5px;
+    }
+  </style>
+</head>
+<body>
+  {% with messages = get_flashed_messages(with_categories=true) %}
+  {% if messages %}
+    {% for category, message in messages %}
+      <div class="alert alert-{{ category }}">{{ message }}</div>
+    {% endfor %}
+  {% endif %}
+{% endwith %}
+
+
+  <!-- Success message and OK button -->
+  <div id="success-wrapper">
+    <div id="success-message">Successfully Registered!</div>
+    <button id="ok-button">OK</button>
+  </div>
+
+  <form method="POST">
+    <h2>Sign Up</h2>
+  
+    <input type="email" name="email" placeholder="Email" required>
+    <input type="text" name="username" placeholder="Username" required>
+    <input type="password" name="password" placeholder="Password" required>
+  
+    <button type="submit">Register</button>
+  </form>
+  
+
+  <script>
+    const resumeInput = document.getElementById('resume');
+    const fileInfo = document.getElementById('file-info');
+    const viewLink = document.getElementById('view-resume');
+    const successWrapper = document.getElementById('success-wrapper');
+    const signupForm = document.getElementById('signup-form');
+    const okButton = document.getElementById('ok-button');
+
+    resumeInput.addEventListener('change', function () {
+      const file = this.files[0];
+      if (file) {
+        fileInfo.textContent = `Selected file: ${file.name}`;
+        const fileURL = URL.createObjectURL(file);
+        viewLink.href = fileURL;
+        viewLink.style.display = 'inline';
+        viewLink.textContent = 'Open Resume';
+      } else {
+        fileInfo.textContent = '';
+        viewLink.style.display = 'none';
+      }
+    });
+
+    signupForm.addEventListener('submit', async function(e) {
+      e.preventDefault();
+
+      const formData = new FormData();
+      formData.append('email', document.getElementById('email').value);
+      formData.append('username', document.getElementById('username').value);
+      formData.append('name', document.getElementById('fullname').value);
+      formData.append('password', document.getElementById('password').value);
+      formData.append('open_to_work', document.getElementById('openToWork').value);
+      
+      const resumeFile = document.getElementById('resume').files[0];
+      if (resumeFile) {
+        formData.append('resume', resumeFile);
+      }
+
+      const response = await fetch('/signup', {
+        method: 'POST',
+        body: formData
+      });
+
+      const result = await response.json();
+      if (result.status === 'success') {
+        successWrapper.style.display = 'flex';
+      } else {
+        alert(result.message || 'Registration failed.');
+      }
+    });
+
+    okButton.addEventListener('click', function () {
+      window.location.href = 'index.html';
+    });
+  </script>
+
+</body>
+</html>

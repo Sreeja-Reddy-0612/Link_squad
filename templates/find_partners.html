@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Find Project Teammate</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      margin: 0;
+      padding: 0;
+      background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)),
+                  url('https://images.unsplash.com/photo-1526374965328-7f61d4dc18c5?auto=format&fit=crop&w=1350&q=80') no-repeat center center/cover;
+      height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .container {
+      background-color: rgba(255, 255, 255, 0.95);
+      padding: 30px;
+      border-radius: 12px;
+      width: 90%;
+      max-width: 600px;
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+    }
+
+    h2 {
+      text-align: center;
+      color: #333;
+    }
+
+    label {
+      display: block;
+      margin-top: 15px;
+      font-weight: 600;
+    }
+
+    input, textarea {
+      width: 100%;
+      padding: 10px;
+      margin-top: 6px;
+      border-radius: 6px;
+      border: 1px solid #ccc;
+      font-size: 15px;
+    }
+
+    button {
+      margin-top: 20px;
+      width: 100%;
+      padding: 12px;
+      background-color: #007bff;
+      color: white;
+      font-size: 16px;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background-color: #0056b3;
+    }
+
+    .result {
+      margin-top: 20px;
+      padding: 10px;
+      background-color: #e9f7ef;
+      border-left: 4px solid #28a745;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h2>🔍 Find Your Project Partner</h2>
+    <form method="POST" action="/find_partners">
+      <label for="skills">Skills Required</label>
+      <input type="text" id="skills" name="skills" placeholder="e.g., Python, React, SQL">
+
+      <label for="location">Preferred Location</label>
+      <input type="text" id="location" name="location" placeholder="e.g., Bangalore, Remote">
+
+      <label for="education">Education</label>
+      <input type="text" id="education" name="education" placeholder="e.g., B.Tech, MCA">
+
+      <label for="projects">Project Interests</label>
+      <textarea id="projects" name="projects" rows="2" placeholder="e.g., Web Development, AI/ML, Blockchain"></textarea>
+
+      <label for="internships">Internship Experience</label>
+      <textarea id="internships" name="internships" rows="2" placeholder="e.g., Google Summer of Code, Microsoft Internship"></textarea>
+
+      <button type="submit">Search Matches</button>
+    </form>
+
+    {% if matches %}
+      <div class="result">
+        <h3>🎯 Matches Found:</h3>
+        <ul>
+          {% for match in matches %}
+            <li>
+              <strong>Name:</strong> {{ match.name }} <br>
+              <strong>Email:</strong> {{ match.email }} <br>
+              <strong>LinkedIn:</strong> <a href="{{ match.linkedin }}" target="_blank">{{ match.linkedin }}</a>
+            </li>
+          {% endfor %}
+        </ul>
+      </div>
+    {% endif %}
+  </div>
+</body>
+</html>

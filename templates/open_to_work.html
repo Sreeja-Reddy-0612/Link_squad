@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Search for Open to Work Profiles</title>
+</head>
+<body>
+    <h2>Search for Matching Profiles</h2>
+    <form method="POST" action="/search">
+        <label>Name: <input type="text" name="name"></label><br>
+        <label>Skills: <input type="text" name="skills" placeholder="e.g. python,java"></label><br>
+        <label>Soft Skills: <input type="text" name="soft_skills"></label><br>
+        <label>Hackathons: <input type="text" name="hackathons"></label><br>
+        <label>Internships: <input type="text" name="internships"></label><br>
+        <label>Certifications: <input type="text" name="certifications"></label><br>
+        <label>Projects: <input type="text" name="projects"></label><br>
+        <label>Roles: <input type="text" name="roles"></label><br>
+        <label>Experience: <input type="text" name="experience"></label><br>
+        <label>College: <input type="text" name="college"></label><br>
+        <label>Location: <input type="text" name="location"></label><br>
+        <label>Platforms:
+            <select name="platforms">
+                <option value="">Any</option>
+                <option value="LinkedIn">LinkedIn</option>
+                <option value="GitHub">GitHub</option>
+                <option value="both">Both</option>
+            </select>
+        </label><br><br>
+        <input type="submit" value="Search">
+    </form>
+
+    {% if profiles %}
+        <h3>Matching Profiles</h3>
+        <ul>
+            {% for name, email in profiles %}
+                <li><strong>{{ name }}</strong> – {{ email }}</li>
+            {% endfor %}
+        </ul>
+    {% elif request.method == 'POST' %}
+        <p>No profiles matched your search.</p>
+    {% endif %}
+</body>
+</html>

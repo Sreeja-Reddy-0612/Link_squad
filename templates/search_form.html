@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Find Project Teammates</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      margin: 0;
+      padding: 40px;
+      height: 100vh;
+      background: 
+        linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)),
+        url('https://images.unsplash.com/photo-1602407294553-6ac9170b3ed0?q=80&w=1974&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D') no-repeat center center;
+      background-size: cover;
+      color: #fff;
+    }
+
+    h2 {
+      text-align: center;
+      color: #ffffff;
+      margin-bottom: 30px;
+    }
+
+    form {
+      max-width: 600px;
+      margin: 0 auto;
+      background: rgba(255, 255, 255, 0.95);
+      padding: 30px;
+      border-radius: 15px;
+      box-shadow: 0 5px 20px rgba(0,0,0,0.2);
+      color: #333;
+    }
+
+    label {
+      font-weight: bold;
+      margin-top: 10px;
+      display: block;
+    }
+
+    input[type="text"],
+    input[type="submit"] {
+      width: 100%;
+      padding: 12px;
+      margin-top: 6px;
+      margin-bottom: 20px;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+      font-size: 14px;
+      transition: border-color 0.3s;
+    }
+
+    input[type="text"]:focus {
+      border-color: #1976d2;
+      outline: none;
+    }
+
+    input[type="submit"] {
+      background-color: #1976d2;
+      color: #fff;
+      border: none;
+      font-weight: bold;
+      transition: background-color 0.3s;
+      cursor: pointer;
+    }
+
+    input[type="submit"]:hover {
+      background-color: #0d47a1;
+    }
+
+    .results {
+      max-width: 700px;
+      margin: 30px auto;
+      padding: 20px;
+      background: rgba(255, 255, 255, 0.95);
+      border-radius: 15px;
+      box-shadow: 0 5px 20px rgba(0,0,0,0.2);
+      color: #333;
+    }
+
+    .result-card {
+      background-color: #f1f8ff;
+      padding: 15px 20px;
+      border-radius: 10px;
+      margin-bottom: 15px;
+      border-left: 4px solid #0d47a1;
+    }
+
+    .result-card strong {
+      font-size: 18px;
+      color: #0d47a1;
+    }
+
+    .result-card a {
+      color: #1565c0;
+      text-decoration: none;
+    }
+
+    .result-card a:hover {
+      text-decoration: underline;
+    }
+
+    @media (max-width: 600px) {
+      body {
+        padding: 20px;
+      }
+
+      form, .results {
+        padding: 20px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <h2>🔍 Find Project Teammates</h2>
+
+  <form method="POST">
+    <label for="skills">Skills (comma separated):</label>
+    <input type="text" name="skills" id="skills" placeholder="e.g., Python, React, MySQL">
+
+    <label for="location">Location:</label>
+    <input type="text" name="location" id="location" placeholder="e.g., Bangalore">
+
+    <label for="education">Education (College/University):</label>
+    <input type="text" name="education" id="education" placeholder="e.g., IIT Delhi">
+
+    <label for="certifications">Certifications:</label>
+    <input type="text" name="certifications" id="certifications" placeholder="e.g., AWS, Azure, ML Specialist">
+
+    <label for="cgpa">Minimum CGPA:</label>
+    <input type="text" name="cgpa" id="cgpa" placeholder="e.g., 8.0">
+
+    <input type="submit" value="Search 🔎">
+  </form>
+
+  {% if searched %}
+    {% if results %}
+        <div class="results">
+            <h3 style="color:#0d47a1;">🎯 Matched Candidates</h3>
+            {% for name, email, linkedin in results %}
+                <div class="result-card">
+                    <strong>{{ name }}</strong><br>
+                    📧 Email: {{ email }}<br>
+                    🔗 LinkedIn: <a href="{{ linkedin }}" target="_blank">{{ linkedin }}</a>
+                </div>
+            {% endfor %}
+        </div>
+    {% else %}
+        <div class="results">
+          <p style="text-align:center; color: #888;">😕 No matches found. Try modifying your search criteria.</p>
+        </div>
+    {% endif %}
+  {% endif %}
+</body>
+</html>

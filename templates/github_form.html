@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>GitHub Project Search</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 40px;
+            min-height: 100vh;
+            color: #fff;
+            background-image: url("{{ url_for('static', filename='gitimg.jpg') }}");
+            background-size: cover;
+            background-repeat: no-repeat;
+            background-position: center;
+        }
+
+        h2 {
+            text-shadow: 1px 1px 4px #000;
+        }
+
+        form {
+            background-color: rgba(0, 0, 0, 0.7);
+            padding: 20px;
+            border-radius: 10px;
+            max-width: 500px;
+            margin-bottom: 30px;
+        }
+
+        input[type="text"],
+        input[type="date"] {
+            width: 100%;
+            padding: 10px;
+            margin-top: 5px;
+            margin-bottom: 15px;
+            border: none;
+            border-radius: 5px;
+        }
+
+        button {
+            padding: 10px 20px;
+            border: none;
+            background-color: #28a745;
+            color: #fff;
+            font-weight: bold;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .results {
+            background-color: rgba(0, 0, 0, 0.6);
+            padding: 20px;
+            border-radius: 10px;
+            max-width: 700px;
+        }
+
+        a {
+            color: #ffd700;
+            text-decoration: none;
+        }
+
+        small {
+            color: #ccc;
+        }
+    </style>
+</head>
+<body>
+    <h2>GitHub Project Search</h2>
+
+    <form method="post">
+        <label>Project Language:</label><br>
+        <input type="text" name="language"><br>
+
+        <label>Project Name:</label><br>
+        <input type="text" name="project_name"><br>
+
+        <label>Creation Date (after):</label><br>
+        <input type="date" name="creation_date"><br>
+
+        <button type="submit">Search</button>
+    </form>
+
+    {% if results %}
+    <div class="results">
+        <h3>Search Results:</h3>
+        <ul>
+            {% for item in results %}
+                <li>
+                    <a href="{{ item.link }}" target="_blank">{{ item.title }}</a><br>
+                    <small>{{ item.snippet }}</small>
+                </li>
+                <br>
+            {% endfor %}
+        </ul>
+    </div>
+    {% elif request.method == 'POST' %}
+        <p>No results found. Try different keywords or filters.</p>
+    {% endif %}
+</body>
+</html>

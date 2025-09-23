@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>LinkSquad – Smart Search Generator</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', sans-serif;
+      background: #f4f4f4;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
+    .wrapper {
+      display: flex;
+      gap: 30px;
+    }
+    .card {
+      width: 350px;
+      min-height: 500px;
+      padding: 20px;
+      border-radius: 15px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+      transition: transform 0.3s ease;
+    }
+    .card:hover { transform: scale(1.03); }
+    .linkedin {
+      background: linear-gradient(to bottom right, #c2e9fb, #a1c4fd);
+      cursor: pointer;
+    }
+    .github {
+      background: linear-gradient(to bottom left, #fbc2eb, #a6c1ee);
+      cursor: pointer;
+    }
+    h2 { text-align: center; color: #003366; margin-bottom: 10px; }
+    p { text-align: center; color: #333; }
+    form { display: none; }
+    form.active { display: block; }
+    .description { display: block; }
+    .description.hidden { display: none; }
+    form input, form select, form button {
+      width: 90%;
+      margin: 8px auto;
+      padding: 10px;
+      display: block;
+      border: 1px solid #888;
+      border-radius: 6px;
+    }
+    form button {
+      background: #004080;
+      color: #fff;
+      cursor: pointer;
+    }
+    form button:hover {
+      background: #0055aa;
+    }
+    .form-title {
+      text-align: center;
+      font-weight: bold;
+      margin: 10px 0;
+      color: #222;
+      font-size: 18px;
+      cursor: pointer;
+    }
+    a {
+      text-align: center;
+      display: block;
+      margin-top: 10px;
+      color: #002266;
+    }
+  </style>
+</head>
+<body>
+  <div class="wrapper">
+    <!-- LinkedIn Box -->
+    <div class="card linkedin" id="linkedinCard">
+      <div id="linkedinDesc" class="description" onclick="showForm('linkedin')">
+        <h2>🔗 LinkedIn</h2>
+        <p>Discover project teammates based on skills, roles, experience and more.</p>
+      </div>
+      <form id="linkedinForm" onsubmit="generateLinkedIn(event)">
+        <div class="form-title" onclick="showDesc('linkedin')">LinkedIn Requirements</div>
+        <input type="text" id="skills" placeholder="Skills">
+        <input type="text" id="jobTitle" placeholder="Job Title">
+        <input type="text" id="company" placeholder="Company">
+        <input type="text" id="experience" placeholder="Experience (e.g., 2)">
+        <input type="text" id="college" placeholder="College">
+        <input type="text" id="location" placeholder="Location">
+        <input type="text" id="softSkills" placeholder="Soft Skills">
+        <input type="text" id="hackathon" placeholder="Hackathon Participation">
+        <input type="text" id="internship" placeholder="Internship Experience">
+        <input type="date" id="linkedinDate" placeholder="After Date (optional)">
+        <button type="submit">Generate LinkedIn Link</button>
+        <div id="linkedinResult"></div>
+      </form>
+    </div>
+
+    <!-- GitHub Box -->
+    <div class="card github" id="githubCard">
+      <div id="githubDesc" class="description" onclick="showForm('github')">
+        <h2>🐙 GitHub</h2>
+        <p>Explore contributors & open-source devs based on language, projects, stars & more.</p>
+      </div>
+      <form id="githubForm" onsubmit="generateGitHub(event)">
+        <div class="form-title" onclick="showDesc('github')">GitHub Requirements</div>
+        <input type="text" id="language" placeholder="Programming Language">
+        <input type="text" id="projectName" placeholder="Project Topic">
+        <input type="number" id="followers" placeholder="Minimum Followers">
+        <input type="number" id="repoCount" placeholder="Minimum Repositories">
+        <input type="date" id="createdAfter" placeholder="Created After">
+
+        <!-- ✅ New Fields -->
+        <input type="number" id="size" placeholder="Minimum Repo Size (KB)">
+        <select id="license">
+          <option value="">License (Optional)</option>
+          <option value="mit">MIT</option>
+          <option value="apache-2.0">Apache 2.0</option>
+          <option value="gpl-3.0">GPL 3.0</option>
+          <option value="bsd-3-clause">BSD 3-Clause</option>
+          <option value="unlicense">Unlicense</option>
+        </select>
+
+        <button type="submit">Generate GitHub Link</button>
+        <div id="githubResult"></div>
+      </form>
+    </div>
+  </div>
+
+  <script>
+    function showForm(type) {
+      document.getElementById(`${type}Form`).classList.add('active');
+      document.getElementById(`${type}Desc`).classList.add('hidden');
+    }
+
+    function showDesc(type) {
+      event.stopPropagation();
+      document.getElementById(`${type}Form`).classList.remove('active');
+      document.getElementById(`${type}Desc`).classList.remove('hidden');
+    }
+
+    function generateLinkedIn(event) {
+      event.preventDefault();
+      const data = {
+        skills: document.getElementById("skills").value,
+        jobTitle: document.getElementById("jobTitle").value,
+        company: document.getElementById("company").value,
+        experience: document.getElementById("experience").value,
+        college: document.getElementById("college").value,
+        location: document.getElementById("location").value,
+        softSkills: document.getElementById("softSkills").value,
+        hackathon: document.getElementById("hackathon").value,
+        internship: document.getElementById("internship").value,
+        date: document.getElementById("linkedinDate").value
+      };
+
+      fetch("/generate-linkedin", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(data),
+      })
+      .then(response => response.json())
+      .then(result => {
+        document.getElementById("linkedinResult").innerHTML = `
+          <a href="${result.linkedin_url}" target="_blank">View LinkedIn Results</a>
+        `;
+      });
+    }
+
+    function generateGitHub(event) {
+      event.preventDefault();
+      const data = {
+        language: document.getElementById("language").value,
+        projectName: document.getElementById("projectName").value,
+        followers: document.getElementById("followers").value,
+        repoCount: document.getElementById("repoCount").value,
+        createdAfter: document.getElementById("createdAfter").value,
+        size: document.getElementById("size").value,
+        license: document.getElementById("license").value,
+      };
+
+      fetch("/generate-github", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(data),
+      })
+      .then(response => response.json())
+      .then(result => {
+        document.getElementById("githubResult").innerHTML = `
+          <a href="${result.github_url}" target="_blank">View GitHub Results</a>
+        `;
+      });
+    }
+  </script>
+</body>
+</html>

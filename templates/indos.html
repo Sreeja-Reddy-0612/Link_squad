@@ -1,0 +1,369 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Find My Project Partner</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Roboto', sans-serif;
+    }
+
+    body {
+      background-color: #fff;
+      color: #2c3e50;
+    }
+
+    .navbar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 20px 40px;
+      background: rgba(0, 0, 0, 0.5);
+      color: #fff;
+      position: relative;
+      z-index: 10;
+    }
+
+    .brand-btn, .nav-link {
+      background: #fff;
+      color: #2c3e50;
+      padding: 10px 18px;
+      border-radius: 8px;
+      font-weight: 600;
+      text-decoration: none;
+      margin-left: 10px;
+      transition: 0.3s;
+    }
+
+    .brand-btn:hover, .nav-link:hover {
+      background: #f0f0f0;
+    }
+
+    .categories-section {
+      background: rgba(255, 255, 255, 0.9);
+      padding: 40px 20px 20px;
+      text-align: center;
+    }
+
+    .category-grid {
+      display: flex;
+      justify-content: center;
+      gap: 40px;
+      flex-wrap: wrap;
+    }
+
+    .category {
+      position: relative;
+      font-weight: bold;
+      cursor: pointer;
+    }
+
+    .category-desc {
+      display: none;
+      position: absolute;
+      top: 30px;
+      left: 0;
+      background: #fff;
+      color: #2c3e50;
+      padding: 10px;
+      border-radius: 8px;
+      width: 250px;
+      font-weight: normal;
+      text-align: left;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.2);
+      z-index: 5;
+    }
+
+    .category:hover .category-desc {
+      display: block;
+    }
+
+    .mid-section {
+      background: url("{{ url_for('static', filename='images/project-part.jpg') }}") no-repeat center center;
+      background-size: cover;
+      background-position: center;
+      position: relative;
+      width: 100%;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      color: #fff;
+      text-align: center;
+    }
+
+    .mid-section::before {
+      content: "";
+      position: absolute;
+      top: 0; left: 0; right: 0; bottom: 0;
+      background: rgba(0, 0, 0, 0.4);
+      z-index: 0;
+    }
+
+    .mid-section * {
+      position: relative;
+      z-index: 1;
+    }
+
+    .main-heading {
+      font-size: 4rem;
+      font-weight: 700;
+      margin-bottom: 20px;
+    }
+
+    .intro-text {
+      font-size: 1.25rem;
+      max-width: 600px;
+      margin: 0 auto 30px;
+      line-height: 1.6;
+    }
+
+    .features-section {
+      background: #fff;
+      color: #2c3e50;
+      padding: 60px 20px;
+      text-align: center;
+    }
+
+    .features-section h2 {
+      font-size: 2rem;
+      margin-bottom: 40px;
+    }
+
+    .feature-item {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin: 40px auto;
+      max-width: 1000px;
+      flex-wrap: wrap;
+    }
+
+    .feature-item:nth-child(odd) {
+      flex-direction: row;
+    }
+
+    .feature-item:nth-child(even) {
+      flex-direction: row-reverse;
+    }
+
+    .feature-text {
+      flex: 1;
+      padding: 20px;
+      text-align: left;
+    }
+
+    .feature-img {
+      width: 300px;
+      height: auto;
+      border-radius: 12px;
+      margin: 20px;
+    }
+
+    .footer-section {
+      display: flex;
+      justify-content: space-around;
+      flex-wrap: wrap;
+      background: #0b0c2a;
+      color: white;
+      padding: 40px 20px;
+    }
+
+    .footer-section h4,
+    .footer-section h3 {
+      margin-bottom: 15px;
+    }
+
+    .footer-section ul {
+      list-style: none;
+      padding: 0;
+    }
+
+    .footer-section ul li {
+      margin-bottom: 8px;
+    }
+
+    .footer-bottom {
+      text-align: center;
+      background: #08091f;
+      padding: 10px;
+      color: #ccc;
+    }
+
+    .btn-primary {
+      background: #fff;
+      color: #2c3e50;
+      padding: 12px 24px;
+      border-radius: 10px;
+      font-weight: bold;
+      text-decoration: none;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+      transition: 0.3s;
+    }
+
+    .btn-primary:hover {
+      background: #e0e0e0;
+    }
+    .mid-section {
+      background-image: url('https://media.istockphoto.com/id/1492624606/photo/diverse-group-of-engineers-brainstorming-together-in-a-meeting-room.webp?a=1&b=1&s=612x612&w=0&k=20&c=6cd1cOnWZ82CGMaFowQWBKVyEf0SC6_CHvXj1QOhSEU=');
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+      color: white;
+      padding: 150px 20px;
+      text-align: center;
+      position: relative;
+    }
+    
+    .mid-section .overlay {
+      background-color: rgba(0, 0, 0, 0.5); /* Optional dark overlay */
+      display: inline-block;
+      padding: 20px 30px;
+      border-radius: 10px;
+    }
+    
+  </style>
+</head>
+<body>
+  <header class="navbar">
+    <!-- Find My Project Partner -->
+    <a href="{{ url_for('foot') }}" class="brand-btn" style="font-size: 20px; font-weight: bold;">
+      Find My Project Partner
+    </a>
+  
+    <div style="display: flex; gap: 10px; align-items: center;">
+      <!-- ✅ Resume -->
+      <a href="{{ url_for('resume') }}" class="nav-link">Resume</a>
+      
+      <!-- Open to Work -->
+      <a href="{{ url_for('home_work') }}" class="nav-link">Open to Work</a>
+  
+      <!-- Competitions -->
+      <a href="{{ url_for('competitions') }}" class="nav-link">Competitions</a>
+    </div>
+  
+    <div>
+      {% if email %}
+        <span class="nav-link" style="pointer-events: none;">{{ email }}</span>
+        <a href="{{ url_for('logout') }}" class="nav-link">Logout</a>
+      {% else %}
+        <a href="{{ url_for('signup') }}" class="nav-link">Sign Up</a>
+        <a href="{{ url_for('login') }}" class="nav-link">Login</a>
+      {% endif %}
+    </div>
+</header>
+
+  
+  
+
+  <section class="categories-section">
+    <div class="category-grid">
+      <div class="category">LinkedIn 
+        <div class="category-desc">
+          Instantly discover LinkedIn profiles that match your project teammate needs.<br>
+          Auto-generated search links tailored to your skills and roles.
+        </div>
+      </div>
+      <div class="category">Resume Scanner
+        <div class="category-desc">
+          Smart teammate suggestions based on resumes uploaded by users.<br>
+          Skills and experience auto-extracted to match quality profiles.
+        </div>
+      </div>
+      <div class="category">Open to Work Pool
+        <div class="category-desc">
+          Access a live pool of users ready to join hackathons and projects.<br>
+          Filter candidates by availability, mode, and expertise.
+        </div>
+      </div>
+      
+      <div class="category">GitHub Explorer
+        <div class="category-desc">
+          Get project suggestions from GitHub based on your tech stack.<br>
+          Discover active contributor collaborators.
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="mid-section">
+    <div class="overlay">
+      <h1>Welcome to Link_Squard</h1>
+      <p>Your perfect partner is just a click away.</p>
+    </div>
+  </section>
+  
+
+  <section class="features-section">
+    <h2>Platform Features</h2>
+
+    <div class="feature-item">
+      <img src="{{ url_for('static', filename='images/prooo.jpg') }}" alt="Partner">
+      <div class="feature-text">
+        <h3>Smart Matching</h3>
+        <p>Our intelligent algorithm seamlessly connects you with potential collaborators based on your skills, interests, and project requirements.</p>
+      </div>
+    </div>
+
+    <div class="feature-item">
+      <img src="{{ url_for('static', filename='images/project.jpg') }}" alt="Partner">
+      <div class="feature-text">
+        <h3>Collaborative Tools</h3>
+        <p>Empower your team with built-in tools for communication, file sharing, and progress tracking for smooth coordination from start to finish.</p>
+      </div>
+    </div>
+
+    <div class="feature-item">
+      <img src="{{ url_for('static', filename='images/pro.jpg') }}" alt="Partner">
+      <div class="feature-text">
+        <h3>Verified Profiles</h3>
+        <p>We verify user credentials to ensure trusted, skilled connections. Work with real people for real outcomes.</p>
+      </div>
+    </div>
+
+    <div class="feature-item">
+      <img src="{{ url_for('static', filename='images/partner.jpg') }}" alt="Partner">
+      <div class="feature-text">
+        <h3>For Students & Professionals</h3>
+        <p>Whether you're a student seeking experience or a professional chasing innovation, Link_Sqiard connects you with the right team.</p>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <div class="footer-section">
+      <div>
+        <h3>Link_Sqiard</h3>
+        <p>hello@linksqiard.com</p>
+        <p>+91 98765 43210</p>
+      </div>
+      <div>
+        <h4>About Link_Sqiard</h4>
+        <ul>
+          <li>Our Vision</li>
+          <li>User Stories</li>
+          <li>Team Behind</li>
+          <li>Open Source Policy</li>
+        </ul>
+      </div>
+      <div>
+        <h4>Resources</h4>
+        <ul>
+          <li>Developer Articles</li>
+          <li>Resume Tips</li>
+          <li>GitHub Tutorials</li>
+          <li>Project Matching Blog</li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      &copy; 2025 Link_Sqiard. All rights reserved.
+    </div>
+  </footer>
+</body>
+</html>

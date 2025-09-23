@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Open to Work Form</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      max-width: 800px;
+      margin: auto;
+      padding: 20px;
+    }
+
+    h2 {
+      text-align: center;
+    }
+
+    label {
+      font-weight: bold;
+    }
+
+    input, textarea, select {
+      width: 100%;
+      padding: 8px;
+      margin-top: 4px;
+      margin-bottom: 15px;
+      border-radius: 6px;
+      border: 1px solid #ccc;
+    }
+
+    button {
+      width: 100%;
+      padding: 10px;
+      font-size: 16px;
+      background-color: #4CAF50;
+      color: white;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background-color: #45a049;
+    }
+
+    .experience-group {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 10px;
+    }
+  </style>
+</head>
+<body>
+
+  <h2>Open to Work - Profile Form</h2>
+  {% if submitted %}
+  <p style="color: green; font-weight: bold;">Form submitted successfully!</p>
+{% endif %}
+
+
+  <form action="#" method="POST">
+
+    <label for="name">Name</label>
+    <input type="text" id="name" name="name">
+
+    <label for="email">Email</label>
+    <input type="email" id="email" name="email">
+
+    <label for="linkedin">LinkedIn ID</label>
+    <input type="url" id="linkedin" name="linkedin">
+
+    <label for="github">github ID</label>
+<input type="url" id="github" name="github">
+
+
+    <label for="technicalSkills">Technical Skills</label>
+    <textarea id="technicalSkills" name="technicalSkills" rows="2" placeholder="e.g., Python, React, SQL"></textarea>
+
+    <label for="softSkills">Soft Skills</label>
+    <textarea id="softSkills" name="softSkills" rows="2" placeholder="e.g., Communication, Leadership"></textarea>
+
+    <label for="hackathons">Hackathons</label>
+    <textarea id="hackathons" name="hackathons" rows="2" placeholder="e.g., Smart India Hackathon 2023 - Finalist"></textarea>
+
+    <label for="internships">Internships</label>
+    <textarea id="internships" name="internships" rows="2" placeholder="Company, Role, Duration"></textarea>
+
+    <label for="certifications">Certifications</label>
+    <textarea id="certifications" name="certifications" rows="2" placeholder="e.g., AWS Certified Developer"></textarea>
+
+    <label for="projects">Projects</label>
+    <textarea id="projects" name="projects" rows="3" placeholder="Project Name - Description - Tech Stack"></textarea>
+
+    <label>Experience</label>
+    <div class="experience-group">
+      <input type="text" name="experience_company" placeholder="Company Name">
+      <input type="text" name="experience_designation" placeholder="Designation">
+      <input type="text" name="experience_years" placeholder="Years">
+    </div>
+
+    <label for="college">College</label>
+    <input type="text" id="college" name="college">
+
+    <label for="location">Location</label>
+    <input type="text" id="location" name="location">
+
+    <label for="modeOfWork">Preferred Mode of Work</label>
+    <select id="modeOfWork" name="modeOfWork">
+      <option value="">-- Select an option --</option>
+      <option value="offline">Offline</option>
+      <option value="online">Online</option>
+      <option value="both">Both</option>
+    </select>
+
+    <button type="submit">Submit</button>
+  </form>
+
+</body>
+</html>

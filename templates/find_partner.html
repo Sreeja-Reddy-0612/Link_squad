@@ -1,0 +1,317 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Find Page</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <style>
+        * {
+            margin: 0;
+            font-family: Arial;
+            box-sizing: border-box;
+        }
+        .navbar {
+            height: 60px;
+            background-color: #0f1111;
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: space-evenly;
+        }
+        .nav-logo {
+            height: 65px;
+            width: 100px;
+        }
+        .logo {
+            font-size: 30px;
+            color: white;
+        }
+        .border {
+            border: 1.5px solid transparent;
+        }
+        .nav-search {
+            display: flex;
+            justify-content: space-evenly;
+            background-color: #0f1111;
+            width: 620px;
+            height: 40px;
+            border-radius: 4px;
+        }
+        .search-select, .search-input, .search-icon {
+            background-color: #0f1111;
+            border: none;
+        }
+        .search-icon {
+            width: 45px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 1rem;
+            color: #0f1111;
+        }
+        span {
+            font-size: 0.7rem;
+        }
+        .nav-second {
+            font-size: 0.85rem;
+            font-weight: 700;
+        }
+        .nav-cart i {
+            font-size: 30px;
+        }
+        .nav-cart {
+            font-size: 0.85rem;
+            font-weight: 700;
+        }
+        .shop-section {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-evenly;
+            background-color: #1434A4;
+            padding: 20px 0;
+        }
+        .box{
+            /* border:2px solid black;*/
+             height : 400px;
+             width: 23%;
+             background-color: white;/*Box layout*/
+             padding : 20px 0px 15px;
+             margin-top: 15px;
+             border-radius:20px;
+         }
+        
+        .box:hover {
+            background-color: #ADD8E6;
+            transform: scale(1.05);
+        }
+        .box2 {
+            border: 2px solid #333;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            background-color: #f5f5f5;
+            overflow: hidden;
+        }
+        .box-content2 {
+            width: 100%;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+        }
+        .sub-box {
+            width: 100%;
+            height: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            transition: transform 0.3s, background-color 0.3s;
+        }
+        .sub-box:first-child,
+        .sub-box:last-child {
+            background-color: #0077b5;
+        }
+        .sub-box:hover {
+            transform: scale(1.1);
+            background-color: #555;
+        }
+        .sub-box img {
+            width: 80%;
+            height: 60%;
+            object-fit: cover;
+        }
+        .box-img {
+            height: 300px;
+            background-size: cover;
+            background-position: center;
+            margin-top: 1rem;
+            margin-bottom: 1rem;
+        }
+        .box-content {
+            margin-left: 1rem;
+            margin-right: 1rem;
+        }
+        .box-content p {
+            color: black;
+        }
+        .footer {
+            margin-top: 15px;
+        }
+        .foot-panel {
+            background-color: #37475a;
+            color: white;
+            height: 50px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 0.85rem;
+        }
+        .foot-panel2 {
+            background-color: #222f3d;
+            color: white;
+            height: 500px;
+            display: flex;
+            justify-content: space-evenly;
+        }
+        ul {
+            margin-top: 20px;
+        }
+        ul p {
+            font-weight: 700;
+        }
+        ul a {
+            display: block;
+            font-size: 0.85rem;
+            margin-top: 10px;
+            color: #dddddd;
+        }
+        .foot-panel4 {
+            background-color: #0f1111;
+            color: white;
+            height: 80px;
+            font-size: 0.7rem;
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+        .pages {
+            padding: 5px;
+        }
+        .copyright {
+            padding-top: 5px;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="navbar">
+            <div class="nav-logo border">
+                <div class="logo">Link Squad</div>
+            </div>
+
+            <div class="nav-address border"></div>
+            <div class="nav-search"></div>
+
+            <div class="nav-signin border">
+                <p><span>Sign In</span></p>
+                <p class="nav-second">Account</p>
+            </div>
+
+            <div class="nav-return border">
+                <p><span>Returns</span></p>
+                <p class="nav-second">& Orders</p>
+            </div>
+
+            <div class="nav-cart border">
+                <i class=""></i> Cart
+            </div> 
+        </div>
+    </header>
+
+    <div class="shop-section">
+
+        <!-- Fixed Box 1 - Git + LinkedIn Search -->
+        <a href="/gitlinked" style="text-decoration: none; color: inherit;">
+            <div class="box1 box">
+                <div class="box-content">
+                <h2>LinkedIn & GitHub</h2>
+                <div class="box-img" style="background-image: url('hlinkgit.jpg');"></div>
+                <p>Learn more</p>
+                </div>
+            </div>
+            <div class="box2 box">
+                
+                <div class="box-content2">
+                    <div class="sub-box">
+                        <img src="hLinkedin.jpg" alt="LinkedIn">
+                        <p style="color: white; font-size: 18px; font-weight: bold;">LinkedIn</p>
+                        
+                    </div>
+                    <div class="sub-box">
+                        <img src="hgithub.jpg" alt="Git">
+    
+                        <p style="color: white; font-size: 18px; font-weight: bold;">Git</p>
+                   
+                   
+                    </div>
+            </div>
+            </div>
+
+        <!-- Resume Box -->
+        <div class="box3 box">
+            <div class="box-content">
+                <h2>Resume</h2>
+                <div class="box-img" style="background-image: url('hresume.jpg');"></div>
+                <p>Learn more</p>
+            </div>
+        </div>
+
+        <!-- Open to Work Box -->
+        <div class="box4 box">
+            <div class="box-content">
+                <h2>Open to work</h2>
+                <div class="box-img" style="background-image: url('hopentowork.jpg');"></div>
+                <p>Learn more</p>
+            </div>
+        </div>
+
+        <!-- All Box -->
+        <div class="box5 box">
+            <div class="box-content">
+                <h2>All</h2>
+                <div class="box-img" style="background-image: url('hAll.jpg');"></div>
+                <p>Learn more</p>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <div class="foot-panel">Back To Top</div>
+
+        <div class="foot-panel2">
+            <ul>
+                <p>Link_Squad</p>
+                <a href="#">hello@linksqiard.com</a>
+                <a href="#">+91 98765 43210</a>
+            </ul>
+            <ul>
+                <p>About Link_Squad</p>
+                <a href="#">Our Vision</a>
+                <a href="#">User stories</a>
+                <a href="#">Team Behind</a>
+                <a href="#">Open Source Policy</a>
+            </ul>
+            <ul>
+                <p>Resources</p>
+                <a href="#">Developer Articles</a>
+                <a href="#">Resume Tips</a>
+                <a href="#">GitHub Tutorials</a>
+                <a href="#">Project Matching Blog</a>
+            </ul>
+            <ul>
+                <p>Help & Support</p>
+                <a href="#">How it works</a>
+                <a href="#">FAQs</a>
+                <a href="#">Privacy Policy</a>
+                <a href="#">Contact Us</a>
+            </ul>
+        </div>
+
+        <div class="foot-panel4">
+            <div class="pages">
+                <a href="#">Conditions of Use</a> |
+                <a href="#">Privacy Notice</a> |
+                <a href="#">Your ads privacy choices</a>
+            </div>
+            <div class="copyright">
+                © 2025 Link_Squad. Built with ♥ using Open Source Technologies.
+            </div>
+        </div>
+    </footer>
+</body>
+</html>

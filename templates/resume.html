@@ -1,0 +1,103 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Resume Uploader</title>
+    <link href="https://fonts.googleapis.com/css2?family=Pacifico&family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Poppins', sans-serif;
+            background-image: url('https://images.unsplash.com/photo-1581093588401-0c3f14b299d5?auto=format&fit=crop&w=1400&q=80');
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+        }
+        .container {
+            background-color: rgba(255, 255, 255, 0.95);
+            padding: 40px 50px;
+            border-radius: 20px;
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.2);
+            text-align: center;
+            max-width: 600px;
+            width: 100%;
+            margin-bottom: 30px;
+        }
+        h2 {
+            font-family: 'Pacifico', cursive;
+            font-size: 2.5rem;
+            color: #333;
+            margin-bottom: 20px;
+        }
+        input[type="file"] {
+            margin: 20px 0;
+            padding: 10px;
+            width: 100%;
+            border: 2px dashed #bbb;
+            border-radius: 10px;
+            background-color: #f9f9f9;
+            font-size: 16px;
+        }
+        input[type="submit"] {
+            margin-top: 20px;
+            padding: 12px 25px;
+            background-color: #ff7e5f;
+            color: white;
+            font-weight: bold;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 16px;
+            transition: background-color 0.3s ease;
+        }
+        input[type="submit"]:hover {
+            background-color: #eb6750;
+        }
+        .results {
+            background-color: rgba(255, 255, 255, 0.95);
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
+            max-width: 600px;
+            width: 100%;
+        }
+        .results ul {
+            list-style: none;
+            padding: 0;
+            text-align: left;
+        }
+        .results li {
+            margin: 10px 0;
+            font-size: 16px;
+            line-height: 1.4;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>Resume Uploader 💼</h2>
+        <form method="POST" enctype="multipart/form-data">
+            <input type="file" name="resume" accept="application/pdf" required><br>
+            <input type="submit" value="Upload & Extract">
+        </form>
+    </div>
+
+    {% if data %}
+    <div class="results">
+        <h3>✅ Extracted Resume Details</h3>
+        <ul>
+            {% for key, value in data.items() %}
+                <li><strong>{{ key.capitalize() }}:</strong> {{ value }}</li>
+            {% endfor %}
+        </ul>
+    </div>
+    {% endif %}
+</body>
+</html>

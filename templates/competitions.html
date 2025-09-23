@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Upcoming Hackathons - Devpost</title>
+    <style>
+        body { font-family: Arial, sans-serif; padding: 20px; background: #f9f9f9; }
+        h1 { color: #333; }
+        .event {
+            background: white;
+            border-radius: 10px;
+            padding: 15px;
+            margin-bottom: 15px;
+            box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+        }
+        .event a { text-decoration: none; color: #007bff; font-weight: bold; }
+        .event p { margin: 5px 0; color: #555; }
+    </style>
+</head>
+<body>
+    <h1>Upcoming Hackathons on Devpost</h1>
+    {% if events %}
+        {% for event in events %}
+            <div class="event">
+                <a href="{{ event.link }}" target="_blank">{{ event.title }}</a>
+                <p>{{ event.snippet }}</p>
+            </div>
+        {% endfor %}
+    
+    {% endif %}
+</body>
+</html>
