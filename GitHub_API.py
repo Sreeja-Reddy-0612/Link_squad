@@ -4,8 +4,11 @@ import requests
 app = Flask(__name__)
 
 # Replace these with your actual API key and search engine ID
-API_KEY = 'AIzaSyAfx71S85qKinRvt_JxGy8uOdoQS67kfB0'
-SEARCH_ENGINE_ID = 'c21367a6f49c0497b'
+API_KEY = os.getenv("GITHUB_API_KEY")
+SEARCH_ENGINE_ID = os.getenv("GITHUB_SEARCH_ENGINE_ID")
+
+# GITHUB_API_KEY = os.getenv("GITHUB_API_KEY")
+# GITHUB_SEARCH_ENGINE_ID = os.getenv("GITHUB_SEARCH_ENGINE_ID")
 
 @app.route('/', methods=['GET', 'POST'])
 def index():
