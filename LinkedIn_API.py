@@ -11,7 +11,8 @@ load_dotenv()
 
 API_KEY = os.getenv("LINKEDIN_API_KEY")
 CX = os.getenv("LINKEDIN_CX")
-
+# LINKEDIN_API_KEY = os.getenv("LINKEDIN_API_KEY")
+# LINKEDIN_CX = os.getenv("LINKEDIN_CX")
 
 def build_search_query(data):
     query_parts = []
